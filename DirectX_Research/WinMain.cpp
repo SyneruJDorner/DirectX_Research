@@ -1,11 +1,39 @@
 #include <Windows.h>
+#include "WindowsMessageMap.h"
+#include <sstream>
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	static WindowsMessageMap mm;
+	OutputDebugString(mm(msg, lParam, wParam).c_str());
+
 	switch (msg)
 	{
 		case WM_CLOSE:
 			PostQuitMessage(0);
+			break;
+		case WM_KEYDOWN:
+			if (wParam == 'F')
+				SetWindowText(hWnd, "Changed name");
+			break;
+		case WM_KEYUP:
+			if (wParam == 'F')
+				SetWindowText(hWnd, "Direct X Research");
+			break;
+		case WM_CHAR:
+			{
+				static std::string title;
+				title.push_back((char)wParam);
+				SetWindowText(hWnd, title.c_str());
+			}
+			break;
+		case WM_LBUTTONDOWN:
+			{
+				const POINTS pts = MAKEPOINTS(lParam);
+				std::ostringstream oss;
+				oss << "(" << pts.x << "," << pts.y << ")";
+				SetWindowText(hWnd, oss.str().c_str());
+			}
 			break;
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
