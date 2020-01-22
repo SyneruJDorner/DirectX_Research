@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="GlobalExceptionHandler.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LoopTimer.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="GlobalExceptionHandler.h" />
+    <ClInclude Include="Graphics.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LoopTimer.h" />
     <ClInclude Include="Mouse.h" />

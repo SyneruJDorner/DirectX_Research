@@ -71,13 +71,21 @@ Window::Window(int width, int height, const char* name)
 	if (hWnd == nullptr)
 		throw CHWND_LAST_EXCEPT();
 
-	// show window
+	// newly created windows start off as hidden
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
+
+	//Create graphics object
+	pGfx = std::make_unique<Graphics>(hWnd);
 }
 
 Window::~Window()
 {
 	DestroyWindow(hWnd);
+}
+
+Graphics& Window::Gfx()
+{
+	return *pGfx;
 }
 
 void Window::SetTitle(const std::string& title)
