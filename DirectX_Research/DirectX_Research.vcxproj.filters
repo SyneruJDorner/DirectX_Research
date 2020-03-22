@@ -16,6 +16,9 @@
     <Filter Include="DirectX Error Messaging">
       <UniqueIdentifier>{95e428f5-3aa6-49e7-bbd7-64a10c7f6c4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{274e3986-8a91-4717-a213-648c6cac44fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -110,5 +113,13 @@
     <None Include="DXTrace.inl">
       <Filter>DirectX Error Messaging</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
