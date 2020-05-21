@@ -3,10 +3,11 @@
 #include "Graphics.h"
 #include <dxgidebug.h>
 #include <memory>
+#include "GraphicsThrowMacros.h"
+#include "WindowsThrowMacros.h"
 
 #pragma comment(lib, "dxguid.lib")
 
-#define GFX_THROW_NOINFO(hrcall) if( FAILED( hr = (hrcall) ) ) throw Graphics::HrException( __LINE__,__FILE__,hr )
 
 DxgiInfoManager::DxgiInfoManager()
 {
@@ -48,14 +49,11 @@ std::vector<std::string> DxgiInfoManager::GetMessages() const
 	{
 		HRESULT hr;
 		SIZE_T messageLength;
-
 		// get the size of message i in bytes
 		GFX_THROW_NOINFO(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &messageLength));
-
 		// allocate memory for message
 		auto bytes = std::make_unique<byte[]>(messageLength);
 		auto pMessage = reinterpret_cast<DXGI_INFO_QUEUE_MESSAGE*>(bytes.get());
-
 		// get the message and push its description into the vector
 		GFX_THROW_NOINFO(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, pMessage, &messageLength));
 		messages.emplace_back(pMessage->pDescription);
